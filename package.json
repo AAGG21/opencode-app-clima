@@ -1,17 +1,24 @@
 {
   "name": "app-clima",
-  "module": "index.ts",
+  "module": "index.tsx",
   "type": "module",
   "private": true,
-  "scripts": { 
-    "start": "bun run index.ts",
-    "dev": "bun run index.ts --watch",
-    "build": "bun --compile index.ts --outfile app-clima"
+  "scripts": {
+    "start": "bun run index.tsx",
+    "dev": "bun run index.tsx --watch",
+    "build": "bun build --compile index.tsx --outfile app-clima && bun -e \"require('fs').cpSync(require.resolve('yoga-wasm-web/dist/yoga.wasm'), 'yoga.wasm', { force: true })\"",
+    "start:win": "start cmd /c \"bun run index.tsx & pause\""
   },
   "devDependencies": {
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "@types/react": "18",
+    "ink": "4",
+    "react": "18",
+    "react-devtools-core": "^7.0.1"
   }
 }

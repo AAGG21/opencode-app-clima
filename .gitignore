@@ -1,6 +1,13 @@
 # dependencies (bun install)
 node_modules
 
+# 
+app-clima.exe
+tty-test.txt
+yoga.wasm
+plan-cli.md
+.tmp-test-cyIabz
+
 # output
 out
 dist
