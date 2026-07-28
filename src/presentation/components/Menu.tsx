@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Box, Text, useInput } from 'ink'
-import type { AppData } from '../types'
-import { colors } from '../theme'
+import type { AppData } from '../../types/AppData'
+import { colors } from '../../utils/colors'
 
 interface Props {
   data: AppData

@@ -1,5 +1,5 @@
 import { Text, useInput } from 'ink'
-import { colors } from '../theme'
+import { colors } from '../../utils/colors'
 
 interface Props {
   onPress: () => void

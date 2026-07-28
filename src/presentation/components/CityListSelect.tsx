@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Box, Text, useInput } from 'ink'
-import type { City } from '../types'
-import { colors } from '../theme'
+import type { City } from '../../types/City'
+import { colors } from '../../utils/colors'
 import { PressAnyKey } from './PressAnyKey'
 
 interface Props {

@@ -1,21 +1,16 @@
 import { useState, useEffect } from 'react'
 import { Box, Text, useInput } from 'ink'
-import type { City, ForecastData } from '../types'
-import { getForecast, weatherEmoji, weatherDescription } from '../weather'
-import { colors } from '../theme'
+import type { City } from '../../types/City'
+import type { ForecastData } from '../../types/Weather'
+import { getForecast, weatherEmoji, weatherDescription } from '../../api/weather'
+import { colors } from '../../utils/colors'
+import { formatDate } from '../../utils/format'
 import { PressAnyKey } from './PressAnyKey'
 
 interface Props {
   city: City
   unit: 'celsius' | 'fahrenheit'
   onDone: () => void
-}
-
-function formatDate(dateStr: string): string {
-  const [y, m, d] = dateStr.split('-')
-  const date = new Date(+y!, +m! - 1, +d!)
-  const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
-  return `${days[date.getDay()]!} ${d}/${m}`
 }
 
 export function Forecast({ city, unit, onDone }: Props) {

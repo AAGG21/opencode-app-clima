@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Box, Text, useInput } from 'ink'
-import type { City, GeocodingResult } from '../types'
-import { searchCity } from '../geocoding'
-import { colors } from '../theme'
+import type { City } from '../../types/City'
+import type { GeocodingResult } from '../../types/City'
+import { searchCity } from '../../api/geocoding'
+import { colors } from '../../utils/colors'
 
 interface Props {
   onAdd: (city: City) => void

@@ -1,6 +1,5 @@
-import type { GeocodingResult } from './types'
-
-const GEOCODING_URL = 'https://geocoding-api.open-meteo.com/v1/search'
+import type { GeocodingResult } from '../types/City'
+import { GEOCODING_URL } from '../utils/constants'
 
 export async function searchCity(query: string): Promise<GeocodingResult[]> {
   const url = `${GEOCODING_URL}?name=${encodeURIComponent(query)}&count=5&format=json`

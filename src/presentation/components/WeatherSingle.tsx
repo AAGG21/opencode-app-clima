@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Box, Text, useInput } from 'ink'
-import type { City, CurrentWeather } from '../types'
-import { getWeather, weatherEmoji, weatherDescription } from '../weather'
-import { colors } from '../theme'
+import type { City } from '../../types/City'
+import type { CurrentWeather } from '../../types/Weather'
+import { getWeather, weatherEmoji, weatherDescription } from '../../api/weather'
+import { colors } from '../../utils/colors'
 import { PressAnyKey } from './PressAnyKey'
 
 interface Props {

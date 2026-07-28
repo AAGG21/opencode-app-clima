@@ -1,6 +1,6 @@
-import type { City, CurrentWeather, ForecastData } from './types'
-
-const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast'
+import type { City } from '../types/City'
+import type { CurrentWeather, ForecastData } from '../types/Weather'
+import { FORECAST_URL } from '../utils/constants'
 
 export async function getWeather(city: City, unit: 'celsius' | 'fahrenheit'): Promise<CurrentWeather> {
   const tempUnit = unit === 'celsius' ? 'celsius' : 'fahrenheit'

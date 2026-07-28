@@ -1,6 +1,6 @@
 import { join } from 'path'
 import { homedir } from 'os'
-import type { AppData } from './types'
+import type { AppData } from '../types/AppData'
 
 const DATA_DIR = process.env.WEATHER_CLI_DATA_DIR ?? join(homedir(), '.config', 'weather-cli')
 const DATA_FILE = join(DATA_DIR, 'data.json')

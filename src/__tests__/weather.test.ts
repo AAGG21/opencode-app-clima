@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test'
-import { weatherEmoji, weatherDescription } from '../weather'
+import { weatherEmoji, weatherDescription } from '../api/weather'
 
 describe('weatherEmoji', () => {
   it('returns sun for clear sky (0)', () => expect(weatherEmoji(0)).toBe('☀️'))
