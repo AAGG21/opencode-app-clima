@@ -18,7 +18,7 @@
 
 ## Structure
 - Entry: `index.tsx` — renderiza `<App />` con Ink
-- Components: `src/components/App.tsx`, `Menu.tsx`, `WeatherSingle.tsx`, `WeatherAll.tsx`, `CitySearch.tsx`, `CityListSelect.tsx`, `Settings.tsx`, `PressAnyKey.tsx`
+- Components: `src/components/App.tsx`, `Menu.tsx`, `WeatherSingle.tsx`, `WeatherAll.tsx`, `Forecast.tsx`, `CitySearch.tsx`, `CityListSelect.tsx`, `Settings.tsx`, `PressAnyKey.tsx`
 - Modules: `types.ts`, `storage.ts`, `geocoding.ts`, `weather.ts`
 - External APIs: OpenMeteo (geocoding + forecast) — no API key required, both are free HTTPS endpoints
 

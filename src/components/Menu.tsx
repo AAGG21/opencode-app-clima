@@ -11,6 +11,7 @@ interface Props {
 const items = [
   'Clima de ciudad default',
   'Clima de todas las ciudades',
+  'Pronóstico 7 días',
   'Buscar y agregar ciudad',
   'Eliminar ciudad',
   'Establecer ciudad default',

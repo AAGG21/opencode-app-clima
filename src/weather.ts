@@ -1,4 +1,4 @@
-import type { City, CurrentWeather } from './types'
+import type { City, CurrentWeather, ForecastData } from './types'
 
 const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast'
 
@@ -18,6 +18,30 @@ export async function getWeather(city: City, unit: 'celsius' | 'fahrenheit'): Pr
     temperature: data.current.temperature_2m,
     apparentTemperature: data.current.apparent_temperature,
     weatherCode: data.current.weather_code,
+  }
+}
+
+export async function getForecast(city: City, unit: 'celsius' | 'fahrenheit'): Promise<ForecastData> {
+  const tempUnit = unit === 'celsius' ? 'celsius' : 'fahrenheit'
+  const url = `${FORECAST_URL}?latitude=${city.latitude}&longitude=${city.longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code&temperature_unit=${tempUnit}&forecast_days=7`
+  const res = await fetch(url)
+  if (!res.ok) throw new Error(`Forecast API error: ${res.status}`)
+  const data = await res.json() as {
+    daily: {
+      time: string[]
+      temperature_2m_max: number[]
+      temperature_2m_min: number[]
+      weather_code: number[]
+    }
+  }
+  return {
+    city,
+    days: data.daily.time.map((date, i) => ({
+      date,
+      temperatureMax: data.daily.temperature_2m_max[i]!,
+      temperatureMin: data.daily.temperature_2m_min[i]!,
+      weatherCode: data.daily.weather_code[i]!,
+    })),
   }
 }
 

@@ -7,3 +7,4 @@
 - [x] **Binario:** Ruta de datos cambiada a `~/.config/weather-cli/data.json`. Compila correctamente con `bun run build`.
 - [ ] **Escalabilidad:** Pendiente — la estructura modular actual facilita expansión. Si crece el menú, convendría refactorizar a sistema de comandos.
 - [x] **Carga:** Se agregaron indicadores `printLoading()` antes de cada operación async (consultar clima, buscar ciudad).
+- [x] **7 day forecast:** agregar la posibilidad de obtener el pronóstico del clima para los próximos 7 días.

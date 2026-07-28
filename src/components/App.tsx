@@ -9,9 +9,10 @@ import { WeatherAll } from './WeatherAll'
 import { CitySearch } from './CitySearch'
 import { CityListSelect } from './CityListSelect'
 import { Settings } from './Settings'
+import { Forecast } from './Forecast'
 import { PressAnyKey } from './PressAnyKey'
 
-type Screen = 'menu' | 'weather-default' | 'weather-all' | 'search' | 'remove' | 'set-default' | 'settings'
+type Screen = 'menu' | 'weather-default' | 'weather-all' | 'forecast' | 'search' | 'remove' | 'set-default' | 'settings'
 
 export function App() {
   const { exit } = useApp()
@@ -41,7 +42,7 @@ export function App() {
 
   const goTo = (s: Screen) => setScreen(s)
 
-  const actionScreens: Screen[] = ['weather-default', 'weather-all', 'search', 'remove', 'set-default', 'settings']
+  const actionScreens: Screen[] = ['weather-default', 'weather-all', 'forecast', 'search', 'remove', 'set-default', 'settings']
 
   switch (screen) {
     case 'menu':
@@ -49,7 +50,7 @@ export function App() {
         <Menu
           data={data}
           onSelect={(idx: number) => {
-            if (idx === 6) exit()
+            if (idx === 7) exit()
             goTo(actionScreens[idx]!)
           }}
         />
@@ -77,6 +78,26 @@ export function App() {
 
     case 'weather-all':
       return <WeatherAll cities={data.cities} unit={data.unit} onDone={() => goTo('menu')} />
+
+    case 'forecast': {
+      if (data.defaultCityIndex === null || !data.cities[data.defaultCityIndex]) {
+        return (
+          <Box flexDirection="column" padding={1}>
+            <Box borderStyle="round" borderColor={colors.border} padding={2}>
+              <Text color={colors.error}>No hay ciudad default configurada.</Text>
+              <Box marginTop={1}><PressAnyKey onPress={() => goTo('menu')} /></Box>
+            </Box>
+          </Box>
+        )
+      }
+      return (
+        <Forecast
+          city={data.cities[data.defaultCityIndex]!}
+          unit={data.unit}
+          onDone={() => goTo('menu')}
+        />
+      )
+    }
 
     case 'search':
       return (
