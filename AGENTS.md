@@ -45,9 +45,14 @@ src/
 │       ├── CityListSelect.tsx
 │       ├── Settings.tsx
 │       └── PressAnyKey.tsx
-└── __tests__/              # Tests con bun:test
-    ├── weather.test.ts
-    └── storage.test.ts
+tests/           
+├── api/
+│   ├── geocoding.test.ts
+│   └── weather.test.ts
+├── storage/
+│   └── index.test.ts
+└── utils/
+    └── format.test.ts
 ```
 - Entry: `index.tsx` — renderiza `<App />` con Ink
 - External APIs: OpenMeteo (geocoding + forecast) — no API key required, both are free HTTPS endpoints
