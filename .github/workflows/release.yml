@@ -43,9 +43,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: ubuntu-latest,  artifact: weather-linux-x64 }
-          - { os: macos-latest,   artifact: weather-macos-arm64 }
-          - { os: windows-latest, artifact: weather-windows-x64 }
+          - { os: ubuntu-latest,  artifact: app-clima-linux-x64 }
+          - { os: macos-latest,   artifact: app-clima-macos-arm64 }
+          - { os: windows-latest, artifact: app-clima-windows-x64 }
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -61,10 +61,10 @@ jobs:
       - name: Rename binary
         shell: bash
         run: |
-          if [ -f weather.exe ]; then
-            mv weather.exe "${{ matrix.artifact }}.exe"
+          if [ -f app-clima.exe ]; then
+            mv app-clima.exe "${{ matrix.artifact }}.exe"
           else
-            mv weather "${{ matrix.artifact }}"
+            mv app-clima "${{ matrix.artifact }}"
           fi
 
       - uses: actions/upload-artifact@v4
