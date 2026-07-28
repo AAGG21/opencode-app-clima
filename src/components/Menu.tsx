@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Box, Text, useInput } from 'ink'
 import type { AppData } from '../types'
+import { colors } from '../theme'
 
 interface Props {
   data: AppData
@@ -30,18 +31,22 @@ export function Menu({ data, onSelect }: Props) {
   const unitSymbol = data.unit === 'celsius' ? '°C' : '°F'
 
   return (
-    <Box flexDirection="column" paddingX={2} paddingY={1}>
-      <Text bold color="cyan">═══ WEATHER CLI ═══</Text>
-      <Box flexDirection="column" marginTop={1}>
-        {items.map((item, i) => (
-          <Text key={i} inverse={i === active} color={i === active ? 'cyan' : undefined}>
-            {i === active ? ' ▸ ' : '   '}{i + 1}. {item}
+    <Box flexDirection="column" padding={1}>
+      <Box borderStyle="round" borderColor={colors.border} flexDirection="column" paddingX={2} paddingY={1}>
+        <Text bold color={colors.accent}>WEATHER CLI</Text>
+        <Box flexDirection="column" marginTop={1}>
+          {items.map((item, i) => (
+            <Text key={i} color={i === active ? colors.accent : undefined}>
+              {i === active ? ' ▸ ' : '   '}{item}
+            </Text>
+          ))}
+        </Box>
+        <Box marginTop={1} borderStyle="single" borderColor={colors.dimBorder} paddingX={1} paddingY={1}>
+          <Text color={colors.textMuted}>
+            Ciudades: {data.cities.length}  |  {unitSymbol}
+            {defaultCity ? `  |  ${defaultCity.name}${defaultCity.country ? `, ${defaultCity.country}` : ''}` : ''}
           </Text>
-        ))}
-      </Box>
-      <Box marginTop={1} flexDirection="column">
-        <Text dimColor>Ciudades: {data.cities.length} | Unidad: {unitSymbol}</Text>
-        {defaultCity && <Text dimColor>Default: {defaultCity.name}{defaultCity.country ? `, ${defaultCity.country}` : ''}</Text>}
+        </Box>
       </Box>
     </Box>
   )

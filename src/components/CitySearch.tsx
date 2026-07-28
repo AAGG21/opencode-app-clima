@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Box, Text, useInput } from 'ink'
 import type { City, GeocodingResult } from '../types'
 import { searchCity } from '../geocoding'
+import { colors } from '../theme'
 
 interface Props {
   onAdd: (city: City) => void
@@ -70,34 +71,34 @@ export function CitySearch({ onAdd, onCancel }: Props) {
   })
 
   return (
-    <Box flexDirection="column" padding={2}>
-      <Text bold>Buscar ciudad</Text>
-      <Box marginTop={1}>
-        <Text>{'> '}</Text>
-        <Text>{query || <Text dimColor>Escribe el nombre de la ciudad...</Text>}</Text>
-      </Box>
-      {phase === 'searching' && <Text dimColor marginTop={1}>Buscando...</Text>}
-      {phase === 'results' && (
-        <Box flexDirection="column" marginTop={1}>
-          {results.map((r, i) => {
-            const region = r.admin1 ? `, ${r.admin1}` : ''
-            return (
-              <Text key={r.id} inverse={i === activeResult}>
-                {i === activeResult ? ' ▸ ' : '   '}{r.name}{region}, {r.country}
-              </Text>
-            )
-          })}
+    <Box flexDirection="column" padding={1}>
+      <Box borderStyle="round" borderColor={colors.border} flexDirection="column" padding={2}>
+        <Text bold color={colors.accent}>Buscar ciudad</Text>
+        <Box marginTop={1} borderStyle="single" borderColor={colors.dimBorder} paddingX={1}>
+          <Text>{'> '}</Text>
+          <Text>{query || <Text color={colors.textMuted}>Escribe el nombre de la ciudad...</Text>}</Text>
         </Box>
-      )}
-      {message && (
-        <Text color="red" marginTop={1}>{message}</Text>
-      )}
-      {phase === 'results' && (
-        <Text dimColor marginTop={1}>Flechas para navegar, Enter para agregar, Escape para volver</Text>
-      )}
-      {phase === 'input' && !message && (
-        <Text dimColor marginTop={1}>Enter para buscar, Escape para cancelar</Text>
-      )}
+        {phase === 'searching' && <Text color={colors.textMuted} marginTop={1}>Buscando...</Text>}
+        {phase === 'results' && (
+          <Box flexDirection="column" marginTop={1}>
+            {results.map((r, i) => {
+              const region = r.admin1 ? `, ${r.admin1}` : ''
+              return (
+                <Text key={r.id} color={i === activeResult ? colors.accent : undefined}>
+                  {i === activeResult ? ' ▸ ' : '   '}{r.name}{region}, {r.country}
+                </Text>
+              )
+            })}
+          </Box>
+        )}
+        {message && <Text color={colors.error} marginTop={1}>{message}</Text>}
+        {phase === 'results' && (
+          <Text color={colors.textMuted} marginTop={1}>Flechas — navegar  |  Enter — agregar  |  Escape — volver</Text>
+        )}
+        {phase === 'input' && !message && (
+          <Text color={colors.textMuted} marginTop={1}>Enter — buscar  |  Escape — cancelar</Text>
+        )}
+      </Box>
     </Box>
   )
 }

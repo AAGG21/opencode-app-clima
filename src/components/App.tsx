@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Box, Text, useInput, useApp } from 'ink'
 import { load, save } from '../storage'
 import type { AppData, City } from '../types'
+import { colors } from '../theme'
 import { Menu } from './Menu'
 import { WeatherSingle } from './WeatherSingle'
 import { WeatherAll } from './WeatherAll'
@@ -28,7 +29,7 @@ export function App() {
   if (!data) {
     return (
       <Box padding={2}>
-        <Text>Cargando...</Text>
+        <Text color={colors.textMuted}>Cargando...</Text>
       </Box>
     )
   }
@@ -57,9 +58,11 @@ export function App() {
     case 'weather-default': {
       if (data.defaultCityIndex === null || !data.cities[data.defaultCityIndex]) {
         return (
-          <Box flexDirection="column" padding={2}>
-            <Text color="red">No hay ciudad default configurada.</Text>
-            <Box marginTop={1}><PressAnyKey onPress={() => goTo('menu')} /></Box>
+          <Box flexDirection="column" padding={1}>
+            <Box borderStyle="round" borderColor={colors.border} padding={2}>
+              <Text color={colors.error}>No hay ciudad default configurada.</Text>
+              <Box marginTop={1}><PressAnyKey onPress={() => goTo('menu')} /></Box>
+            </Box>
           </Box>
         )
       }

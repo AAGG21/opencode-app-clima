@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Box, Text, useInput } from 'ink'
 import type { City, CurrentWeather } from '../types'
 import { getWeather, weatherEmoji, weatherDescription } from '../weather'
+import { colors } from '../theme'
 import { PressAnyKey } from './PressAnyKey'
 
 interface Props {
@@ -46,10 +47,10 @@ export function WeatherAll({ cities, unit, onDone }: Props) {
 
   if (cities.length === 0) {
     return (
-      <Box flexDirection="column" padding={2}>
-        <Text color="red">No hay ciudades registradas.</Text>
-        <Box marginTop={1}>
-          <PressAnyKey onPress={onDone} />
+      <Box flexDirection="column" padding={1}>
+        <Box borderStyle="round" borderColor={colors.border} padding={2}>
+          <Text color={colors.error}>No hay ciudades registradas.</Text>
+          <Box marginTop={1}><PressAnyKey onPress={onDone} /></Box>
         </Box>
       </Box>
     )
@@ -58,31 +59,32 @@ export function WeatherAll({ cities, unit, onDone }: Props) {
   const unitSymbol = unit === 'celsius' ? '°C' : '°F'
 
   return (
-    <Box flexDirection="column" padding={2}>
-      {results.map((r, i) =>
-        r.type === 'ok' ? (
-          <Box key={i} flexDirection="column" marginBottom={1}>
-            <Box>
-              <Text>{weatherEmoji(r.weather.weatherCode)} </Text>
-              <Text bold color="yellow">{r.city.name}{r.city.country ? `, ${r.city.country}` : ''}</Text>
+    <Box flexDirection="column" padding={1}>
+      <Box borderStyle="round" borderColor={colors.border} flexDirection="column" padding={2}>
+        {results.map((r, i) =>
+          r.type === 'ok' ? (
+            <Box key={i} flexDirection="column" marginBottom={1}>
+              <Box marginBottom={1}>
+                <Text>{weatherEmoji(r.weather.weatherCode)} </Text>
+                <Text bold color={colors.accent}>{r.city.name}{r.city.country ? `, ${r.city.country}` : ''}</Text>
+              </Box>
+              <Box borderStyle="single" borderColor={colors.dimBorder} paddingX={2} paddingY={1} flexDirection="column">
+                <Text>Temperatura:       <Text bold color={colors.warning}>{r.weather.temperature}{unitSymbol}</Text></Text>
+                <Text>Sensación térmica: <Text bold color={colors.warning}>{r.weather.apparentTemperature}{unitSymbol}</Text></Text>
+                <Text>Condición:         {weatherDescription(r.weather.weatherCode)}</Text>
+              </Box>
             </Box>
-            <Text color="cyan">{'─'.repeat(36)}</Text>
-            <Text>  Temperatura:       <Text bold color="yellow">{r.weather.temperature}{unitSymbol}</Text></Text>
-            <Text>  Sensación térmica: <Text bold color="yellow">{r.weather.apparentTemperature}{unitSymbol}</Text></Text>
-            <Text>  Condición:         {weatherDescription(r.weather.weatherCode)}</Text>
-          </Box>
-        ) : (
-          <Text key={i} color="red">Error con {r.city.name}: {r.error}</Text>
-        )
-      )}
-      {!done && currentIndex < cities.length && (
-        <Text dimColor>Consultando {cities[currentIndex]?.name}...</Text>
-      )}
-      {done && (
-        <Box marginTop={1}>
-          <PressAnyKey onPress={onDone} />
-        </Box>
-      )}
+          ) : (
+            <Text key={i} color={colors.error}>Error con {r.city.name}: {r.error}</Text>
+          )
+        )}
+        {!done && currentIndex < cities.length && (
+          <Text color={colors.textMuted}>Consultando {cities[currentIndex]?.name}...</Text>
+        )}
+        {done && (
+          <Box marginTop={1}><PressAnyKey onPress={onDone} /></Box>
+        )}
+      </Box>
     </Box>
   )
 }
