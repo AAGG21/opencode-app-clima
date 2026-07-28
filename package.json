@@ -1,5 +1,6 @@
 {
   "name": "app-clima",
+  "version": "1.0.0",
   "module": "index.tsx",
   "type": "module",
   "private": true,
