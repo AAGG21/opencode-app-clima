@@ -6,7 +6,9 @@
   "scripts": {
     "start": "bun run index.tsx",
     "dev": "bun run index.tsx --watch",
-    "build": "bun build --compile index.tsx --outfile app-clima && bun -e \"require('fs').cpSync(require.resolve('yoga-wasm-web/dist/yoga.wasm'), 'yoga.wasm', { force: true })\"",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "build": "bun test && bun build --compile index.tsx --outfile app-clima && bun -e \"require('fs').cpSync(require.resolve('yoga-wasm-web/dist/yoga.wasm'), 'yoga.wasm', { force: true })\"",
     "start:win": "start cmd /c \"bun run index.tsx & pause\""
   },
   "devDependencies": {

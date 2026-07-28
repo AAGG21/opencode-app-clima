@@ -11,7 +11,9 @@
 |--------|---------|
 | Run | `bun run index.tsx` or `bun run start` |
 | Dev (watch) | `bun run dev` |
-| Compile binary | `bun run build` → outputs `app-clima.exe` + `yoga.wasm` |
+| Test | `bun test` (43 tests) |
+| Test (watch) | `bun run test:watch` |
+| Compile binary | `bun run build` → ejecuta tests primero; si fallan, no compila |
 | Run (new window) | `bun run start:win` (abre cmd.exe con la app) |
 
 > **Nota:** Ink requiere un terminal real (raw mode). En VS Code el terminal integrado no lo soporta. Usa `bun run start:win` o ejecuta `app-clima.exe` directamente.
